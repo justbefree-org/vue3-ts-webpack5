@@ -1,11 +1,20 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <div id="nav">
+    <router-link to="/test/home">Home</router-link> |
+    <router-link to="/test/about">About</router-link>
+  </div>
   <router-view />
 </template>
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
 
+@Options({})
+export default class App extends Vue {
+  created() {
+    console.log("this is an original created");
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -15,7 +24,7 @@
   color: #2c3e50;
 }
 
-nav {
+#nav {
   padding: 30px;
 
   a {
