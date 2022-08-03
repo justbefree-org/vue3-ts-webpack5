@@ -2,7 +2,7 @@
  * @Author: Just be free
  * @Date:   2020-07-22 10:02:44
  * @Last Modified by:   Just be free
- * @Last Modified time: 2022-07-18 18:24:04
+ * @Last Modified time: 2022-08-03 10:27:08
  * @E-mail: justbefree@126.com
  */
 import { createApp } from "vue";
@@ -15,10 +15,12 @@ class Platform {
   private _appStack: Array<Promise<Anything>>;
   private _App: Component;
   private _id: string;
+  private _plugins: Array<Anything>;
   constructor(args: PlatformConstructorParams) {
     this._appStack = [];
     this._App = args.App;
     this._id = args.id;
+    this._plugins = [];
   }
   private getAppStack() {
     return this._appStack;
@@ -40,6 +42,9 @@ class Platform {
       }
     }
   }
+  public use(plugin: Anything): void {
+    this._plugins.push(plugin);
+  }
   public startUp(callback?: StartUpCallback): void {
     const apps = this.getAppStack();
     Promise.all(apps).then((res) => {
@@ -59,6 +64,9 @@ class Platform {
         .use(store)
         .use(router)
         .use(i18n);
+      this._plugins.forEach((plugin: Anything) => {
+        instance.use(plugin);
+      });
       instance.mount(this._id);
     });
   }
