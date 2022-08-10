@@ -2,7 +2,7 @@
  * @Author: Just be free
  * @Date:   2020-07-30 13:43:52
  * @Last Modified by:   Just be free
- * @Last Modified time: 2022-07-18 18:36:07
+ * @Last Modified time: 2022-08-10 16:11:43
  * @E-mail: justbefree@126.com
  */
 
@@ -24,6 +24,9 @@ export default class Super extends Vue.with(Props) {
     // console.log(this.$options.name, this.appName);
     const keyPath = `${this.appName}.${this.$options.name}.${key}`;
     return this.$t(keyPath, inject);
+  }
+  $lang(key: string, inject: AnyObject = {}) {
+    return this.getProperLanguage(key, inject);
   }
   changeLanguage(lang: string): void {
     this.$i18n.locale = lang;
