@@ -2,7 +2,7 @@
  * @Author: Just be free
  * @Date:   2020-07-27 16:02:38
  * @Last Modified by:   Just be free
- * @Last Modified time: 2022-08-29 15:43:50
+ * @Last Modified time: 2022-08-29 15:45:44
  * @E-mail: justbefree@126.com
  */
 import { APIobject, State } from "./types";
@@ -41,7 +41,7 @@ class StoreManager {
     try {
       this._API = {
         // eslint-disable-next-line
-        ...require(`@/custom/${this._moduleName}/store`)["API"],
+        ...require(`@/overwrite/${this._moduleName}/store`)["API"],
         // eslint-disable-next-line
         ...require(`@/applications/${this._moduleName}/store`)["API"],
       };
