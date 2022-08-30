@@ -1,24 +1,24 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { getConfig } from "@/config";
-import { AnyObject, Anything } from "../types";
+import { AnyObject } from "../types";
 class CancelApi {
-  cancelTokenArr: Anything[];
+  cancelTokenArr: any[];
   constructor() {
     this.cancelTokenArr = [];
   }
   clearToCancelApi() {
-    this.cancelTokenArr.forEach((item: Anything) => {
+    this.cancelTokenArr.forEach((item: any) => {
       item("路由跳转取消请求");
     });
   }
-  pushToCancelApi(cancelToken: Anything) {
+  pushToCancelApi(cancelToken: any) {
     this.cancelTokenArr.push(cancelToken);
   }
 }
 export const cancelApi = new CancelApi();
-export const interceptor = (instance: Anything) => {
+export const interceptor = (instance: AxiosInstance): AxiosInstance => {
   instance.interceptors.request.use(
-    (config: Anything) => {
+    (config: any) => {
       const { url } = config;
       const interceptAddress = getConfig("interceptAddress") as AnyObject;
       if (interceptAddress.timeoutApi.includes(url)) {
@@ -33,8 +33,9 @@ export const interceptor = (instance: Anything) => {
       }
       return config;
     },
-    (error: Anything) => {
+    (error: any) => {
       return Promise.reject(error);
     }
   );
+  return instance;
 };

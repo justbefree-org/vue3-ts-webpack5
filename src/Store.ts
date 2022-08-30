@@ -2,11 +2,13 @@
  * @Author: Just be free
  * @Date:   2020-08-20 17:04:29
  * @Last Modified by:   Just be free
- * @Last Modified time: 2020-08-20 17:30:49
+ * @Last Modified time: 2022-08-30 10:34:50
  * @E-mail: justbefree@126.com
  */
 import { AnyObject } from "./core/types";
 import StoreManager from "@/core/StoreManager";
+import { AxiosInstance } from "axios";
+import { interceptor } from "@/lib/interceptor";
 class Store extends StoreManager {
   constructor(moduleName: string) {
     super(moduleName);
@@ -19,6 +21,10 @@ class Store extends StoreManager {
   }
   protected httpParamsModifier(args: AnyObject): AnyObject {
     return args;
+  }
+  // 拦截器
+  protected interceptor(axios: AxiosInstance): AxiosInstance {
+    return interceptor(axios);
   }
 }
 export default Store;

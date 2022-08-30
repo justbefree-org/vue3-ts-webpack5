@@ -2,7 +2,7 @@
  * @Author: Just be free
  * @Date:   2020-07-27 16:02:38
  * @Last Modified by:   Just be free
- * @Last Modified time: 2022-08-29 15:45:44
+ * @Last Modified time: 2022-08-30 10:33:17
  * @E-mail: justbefree@126.com
  */
 import { APIobject, State } from "./types";
@@ -11,6 +11,7 @@ import { getType } from "../utils/mutationTypes";
 import Http, { HttpMethodTypes } from "../utils/http";
 import { hasProperty } from "../utils";
 import { ActionContext } from "vuex/types";
+import { AxiosInstance } from "axios";
 class StoreManager {
   private _moduleName: string;
   private _actionName: string;
@@ -80,6 +81,9 @@ class StoreManager {
   protected setRequestHeaders(uri: string, params: AnyObject): AnyObject {
     console.log("set http request headers");
     return {};
+  }
+  protected interceptor(axios: AxiosInstance): AxiosInstance {
+    return axios;
   }
   protected mergeConfig(uri: string, params: AnyObject): AnyObject {
     const config = this.setRequestHeaders(uri, params);
