@@ -2,7 +2,7 @@
  * @Author: Just be free
  * @Date:   2020-07-22 10:02:44
  * @Last Modified by:   Just be free
- * @Last Modified time: 2022-08-03 10:27:08
+ * @Last Modified time: 2022-09-19 11:37:19
  * @E-mail: justbefree@126.com
  */
 import { createApp } from "vue";
@@ -50,16 +50,12 @@ class Platform {
     Promise.all(apps).then((res) => {
       console.log(`Platform has started`, res);
       const router = app.getRouter();
+      app.registerDynamicRoutes();
+      typeof callback === "function" && callback({ app });
       const store = app.getStore();
       const i18n = app.getI18n();
-      const { created } = this._App;
       const instance = createApp({
         ...this._App,
-        created() {
-          typeof callback === "function" && callback(this);
-          app.registerDynamicRoutes();
-          created();
-        },
       })
         .use(store)
         .use(router)
