@@ -12,6 +12,9 @@
 
 <script>
 // @ is an alias to /src
+// import HelloWorld from "@/applications/test/hello-world/xxx";
+import { defineAsyncComponent } from "vue";
+// https://vuejs.org/api/general.html#defineasynccomponent
 import HelloWorld from "@/applications/test/hello-world";
 import { default as TestStorage } from "@/applications/test/lib/LocalStore";
 const store = new TestStorage("session", "20200821");
@@ -22,7 +25,7 @@ console.log(store.get("user"));
 export default {
   name: "SweetHome",
   components: {
-    HelloWorld,
+    HelloWorld: defineAsyncComponent(HelloWorld),
   },
 };
 </script>
